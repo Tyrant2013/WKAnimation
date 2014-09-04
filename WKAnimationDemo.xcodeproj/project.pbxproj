@@ -21,6 +21,8 @@
 		EBB8BB5519B833A900C5F722 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB8BB3719B833A900C5F722 /* UIKit.framework */; };
 		EBB8BB5D19B833A900C5F722 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EBB8BB5B19B833A900C5F722 /* InfoPlist.strings */; };
 		EBB8BB5F19B833A900C5F722 /* WKAnimationDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB8BB5E19B833A900C5F722 /* WKAnimationDemoTests.m */; };
+		EBB8BB6B19B8349000C5F722 /* WKAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB8BB6A19B8349000C5F722 /* WKAnimation.m */; };
+		EBB8BB6E19B8351F00C5F722 /* UIView+CapatureImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB8BB6D19B8351F00C5F722 /* UIView+CapatureImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		EBB8BB5A19B833A900C5F722 /* WKAnimationDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WKAnimationDemoTests-Info.plist"; sourceTree = "<group>"; };
 		EBB8BB5C19B833A900C5F722 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EBB8BB5E19B833A900C5F722 /* WKAnimationDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKAnimationDemoTests.m; sourceTree = "<group>"; };
+		EBB8BB6919B8349000C5F722 /* WKAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WKAnimation.h; path = WKAnimation/WKAnimation.h; sourceTree = "<group>"; };
+		EBB8BB6A19B8349000C5F722 /* WKAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WKAnimation.m; path = WKAnimation/WKAnimation.m; sourceTree = "<group>"; };
+		EBB8BB6C19B8351F00C5F722 /* UIView+CapatureImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CapatureImage.h"; path = "WKAnimation/UIView+CapatureImage.h"; sourceTree = "<group>"; };
+		EBB8BB6D19B8351F00C5F722 /* UIView+CapatureImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CapatureImage.m"; path = "WKAnimation/UIView+CapatureImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,7 @@
 		EBB8BB2719B833A900C5F722 = {
 			isa = PBXGroup;
 			children = (
+				EBB8BB6819B8346D00C5F722 /* WKAnimation */,
 				EBB8BB3919B833A900C5F722 /* WKAnimationDemo */,
 				EBB8BB5819B833A900C5F722 /* WKAnimationDemoTests */,
 				EBB8BB3219B833A900C5F722 /* Frameworks */,
@@ -150,6 +157,17 @@
 				EBB8BB5B19B833A900C5F722 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EBB8BB6819B8346D00C5F722 /* WKAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				EBB8BB6919B8349000C5F722 /* WKAnimation.h */,
+				EBB8BB6A19B8349000C5F722 /* WKAnimation.m */,
+				EBB8BB6C19B8351F00C5F722 /* UIView+CapatureImage.h */,
+				EBB8BB6D19B8351F00C5F722 /* UIView+CapatureImage.m */,
+			);
+			name = WKAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,8 +267,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBB8BB6E19B8351F00C5F722 /* UIView+CapatureImage.m in Sources */,
 				EBB8BB4A19B833A900C5F722 /* ViewController.m in Sources */,
 				EBB8BB4419B833A900C5F722 /* AppDelegate.m in Sources */,
+				EBB8BB6B19B8349000C5F722 /* WKAnimation.m in Sources */,
 				EBB8BB4019B833A900C5F722 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
