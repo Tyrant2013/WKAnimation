@@ -25,6 +25,7 @@
 
 - (IBAction)goBack:(UIButton *)sender
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
+//    [self dismissViewControllerAnimated:NO completion:nil];
+    self.returnAnimationBlock();
 }
 @end

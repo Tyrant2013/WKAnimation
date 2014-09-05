@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "UIView+CapatureImage.h"
 #import "WKAnimation.h"
+#import "DestViewController.h"
 
 @interface ViewController ()<
   UITableViewDataSource,
@@ -54,7 +55,11 @@
 {
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIViewController *destViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DestViewController"];
+    DestViewController *destViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DestViewController"];
+    DestViewController *tmpView = destViewController;
+    destViewController.returnAnimationBlock = ^(){
+        [WKAnimation animateReverseFlipFromView:cell fromViewController:self toViewController:tmpView];
+    };
     [WKAnimation animateFlipFromView:cell fromViewController:self toViewController:destViewController];
 }
 

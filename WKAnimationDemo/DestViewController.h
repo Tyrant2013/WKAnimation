@@ -12,4 +12,6 @@
 
 - (IBAction)goBack:(UIButton *)sender;
 
+@property (nonatomic, copy) void (^returnAnimationBlock)();
+
 @end

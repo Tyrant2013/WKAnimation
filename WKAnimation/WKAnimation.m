@@ -106,10 +106,14 @@
                 fromViewController:(UIViewController *)srcViewController
                   toViewController:(UIViewController *)dstViewController
 {
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    
     UIImage *srcImage = [srcView captureImage];
     UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
-    CGRect srcFrame = srcImageView.frame;
+    CGRect srcFrame = [self rectInScreen:srcView];
+    NSLog(@"%@", NSStringFromCGRect(srcFrame));
     srcImageView.layer.zPosition = 1024;
+    srcImageView.frame = srcFrame;
     srcImageView.hidden = YES;
     [srcViewController.view addSubview:srcImageView];
     
@@ -119,7 +123,40 @@
     dstImageView.layer.zPosition = 1024;
     [srcViewController.view addSubview:dstImageView];
     
+    CGRect middle = [self middleFrameWithBeginFrame:srcFrame end:dstFrame];
     
+    CATransform3D srcBeginTransform = CATransform3DMakeRotation(M_PI_2, 0, 1, 0);
+    srcImageView.layer.transform = srcBeginTransform;
+    srcImageView.frame = middle;
+    
+    CGFloat duration = 0.3f;
+    CATransform3D dstTransform = CATransform3DMakeRotation(-M_PI_2, 0, 1, 0);
+    
+    [dstViewController dismissViewControllerAnimated:NO completion:nil];
+    
+    [UIView animateWithDuration:duration
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         dstImageView.layer.transform = dstTransform;
+                         dstImageView.frame = middle;
+                     }
+                     completion:^(BOOL finished) {
+                         [dstImageView removeFromSuperview];
+                         srcImageView.hidden = NO;
+                         CATransform3D srcTransform = CATransform3DMakeRotation(0, 0, 1, 0);
+                         [UIView animateWithDuration:duration
+                                               delay:0
+                                             options:UIViewAnimationOptionCurveEaseIn
+                                          animations:^{
+                                              srcImageView.layer.transform = srcTransform;
+                                              srcImageView.frame = srcFrame;
+                                          }
+                                          completion:^(BOOL finished) {
+                                              [srcImageView removeFromSuperview];
+                                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                                          }];
+                     }];
 }
 
 @end
