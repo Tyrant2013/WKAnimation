@@ -51,21 +51,57 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-    UIImage *image = [cell captureImage];
-    CGRect frame = cell.frame;
-    frame = [tableView.superview convertRect:frame fromView:tableView];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.frame = frame;
-    [self.view addSubview:imageView];
-    self.tableView.hidden = YES;
+    UIImage *srcImage = [cell captureImage];
+    UIImageView *srcIV = [[UIImageView alloc] initWithImage:srcImage];
+    CGRect srcFrame = [cell.superview.superview convertRect:cell.frame fromView:cell.superview];
+    srcIV.frame = srcFrame;
+    srcIV.layer.zPosition = 1024;//重要，否则只能看到一半
+    [self.view addSubview:srcIV];
+    cell.hidden = YES;
     
-//    self.tableView.hidden = YES;
-//    UIImage *image = [self.view captureImage];
-//    UIImageView *iv = [[UIImageView alloc] initWithImage:image];
-//    [self.view addSubview:iv];
+    UIViewController *destViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DestViewController"];
+    UIImage *dstImage = [destViewController.view captureImage];
+    UIImageView *dstImageView = [[UIImageView alloc] initWithImage:dstImage];
+    dstImageView.layer.zPosition = 1024;//重要，否则只能看到一半
+    CGRect dstFrame = dstImageView.frame;
+    [self.view addSubview:dstImageView];
+    dstImageView.hidden = YES;
     
+    CGRect centerFrame = CGRectZero;
+    centerFrame.origin.x = (CGRectGetMinX(srcFrame) + CGRectGetMinX(dstFrame)) / 2;
+    centerFrame.origin.y = (CGRectGetMinY(srcFrame) + CGRectGetMinY(dstFrame)) / 2;
+    centerFrame.size.width = (CGRectGetWidth(srcFrame) + CGRectGetWidth(dstFrame)) / 2;
+    centerFrame.size.height = (CGRectGetHeight(srcFrame) + CGRectGetHeight(dstFrame)) / 2;
+    CATransform3D preTrans = CATransform3DMakeRotation(-M_PI/2, 0, 1, 0);
+    preTrans.m34 = 1.0f/-500;
+    dstImageView.layer.transform = preTrans;
+    dstImageView.frame = centerFrame;
+    
+    CATransform3D srcTransform = CATransform3DMakeRotation(M_PI/2, 0, 1, 0);
+    srcTransform.m34 = 1.0f/-500;
+    
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        srcIV.frame = centerFrame;
+        srcIV.layer.transform = srcTransform;
+        
+    } completion:^(BOOL finished) {
+        [srcIV removeFromSuperview];
+        dstImageView.hidden = NO;
+        CATransform3D dstTranstorm = CATransform3DMakeRotation(0, 0, 1, 0);
+        dstTranstorm.m34 = 1.0f/-500;
+        [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            dstImageView.layer.transform = dstTranstorm;
+            dstImageView.frame = dstFrame;
+        } completion:^(BOOL finished) {
+            tableView.hidden = NO;
+            [dstImageView removeFromSuperview];
+            [self presentViewController:destViewController animated:NO completion:nil];
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        }];
+    }];
 }
 
 @end

@@ -23,6 +23,8 @@
 		EBB8BB5F19B833A900C5F722 /* WKAnimationDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB8BB5E19B833A900C5F722 /* WKAnimationDemoTests.m */; };
 		EBB8BB6B19B8349000C5F722 /* WKAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB8BB6A19B8349000C5F722 /* WKAnimation.m */; };
 		EBB8BB6E19B8351F00C5F722 /* UIView+CapatureImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB8BB6D19B8351F00C5F722 /* UIView+CapatureImage.m */; };
+		EBBBB6B619B95DB80044F417 /* UITableViewSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBBB6B519B95DB80044F417 /* UITableViewSegue.m */; };
+		EBBBB6B919B963200044F417 /* DestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBBB6B819B963200044F417 /* DestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		EBB8BB6A19B8349000C5F722 /* WKAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WKAnimation.m; path = WKAnimation/WKAnimation.m; sourceTree = "<group>"; };
 		EBB8BB6C19B8351F00C5F722 /* UIView+CapatureImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CapatureImage.h"; path = "WKAnimation/UIView+CapatureImage.h"; sourceTree = "<group>"; };
 		EBB8BB6D19B8351F00C5F722 /* UIView+CapatureImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CapatureImage.m"; path = "WKAnimation/UIView+CapatureImage.m"; sourceTree = "<group>"; };
+		EBBBB6B419B95DB80044F417 /* UITableViewSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITableViewSegue.h; path = CustomSegue/UITableViewSegue.h; sourceTree = "<group>"; };
+		EBBBB6B519B95DB80044F417 /* UITableViewSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITableViewSegue.m; path = CustomSegue/UITableViewSegue.m; sourceTree = "<group>"; };
+		EBBBB6B719B963200044F417 /* DestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DestViewController.h; sourceTree = "<group>"; };
+		EBBBB6B819B963200044F417 /* DestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,7 @@
 		EBB8BB3919B833A900C5F722 /* WKAnimationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EBBBB6B319B95D700044F417 /* CustomSegue */,
 				EBB8BB4219B833A900C5F722 /* AppDelegate.h */,
 				EBB8BB4319B833A900C5F722 /* AppDelegate.m */,
 				EBB8BB4519B833A900C5F722 /* Main.storyboard */,
@@ -126,6 +133,8 @@
 				EBB8BB4919B833A900C5F722 /* ViewController.m */,
 				EBB8BB4B19B833A900C5F722 /* Images.xcassets */,
 				EBB8BB3A19B833A900C5F722 /* Supporting Files */,
+				EBBBB6B719B963200044F417 /* DestViewController.h */,
+				EBBBB6B819B963200044F417 /* DestViewController.m */,
 			);
 			path = WKAnimationDemo;
 			sourceTree = "<group>";
@@ -168,6 +177,15 @@
 				EBB8BB6D19B8351F00C5F722 /* UIView+CapatureImage.m */,
 			);
 			name = WKAnimation;
+			sourceTree = "<group>";
+		};
+		EBBBB6B319B95D700044F417 /* CustomSegue */ = {
+			isa = PBXGroup;
+			children = (
+				EBBBB6B419B95DB80044F417 /* UITableViewSegue.h */,
+				EBBBB6B519B95DB80044F417 /* UITableViewSegue.m */,
+			);
+			name = CustomSegue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +289,9 @@
 				EBB8BB4A19B833A900C5F722 /* ViewController.m in Sources */,
 				EBB8BB4419B833A900C5F722 /* AppDelegate.m in Sources */,
 				EBB8BB6B19B8349000C5F722 /* WKAnimation.m in Sources */,
+				EBBBB6B919B963200044F417 /* DestViewController.m in Sources */,
 				EBB8BB4019B833A900C5F722 /* main.m in Sources */,
+				EBBBB6B619B95DB80044F417 /* UITableViewSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +496,7 @@
 				EBB8BB6419B833A900C5F722 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBB8BB6519B833A900C5F722 /* Build configuration list for PBXNativeTarget "WKAnimationDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +505,7 @@
 				EBB8BB6719B833A900C5F722 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
