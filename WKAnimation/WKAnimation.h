@@ -10,4 +10,7 @@
 
 @interface WKAnimation : NSObject
 
++ (void)animateFlipFromView:(UIView *)srcView fromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController;
++ (void)animateReverseFlipFromView:(UIView *)srcView fromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController;
+
 @end
