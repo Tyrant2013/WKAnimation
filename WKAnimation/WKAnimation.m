@@ -51,6 +51,7 @@
 {
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     
+    //create src imageview that the current view
     UIImage *srcImage = [srcView captureImage];
     UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
     CGRect srcFrame = [self rectInScreen:srcView];
@@ -58,6 +59,7 @@
     srcImageView.frame = srcFrame;
     [srcViewController.view addSubview:srcImageView];
     
+    //create dst imageview that will go to
     UIImage *dstImage = [dstViewController.view captureImage];
     UIImageView *dstImageView = [[UIImageView alloc] initWithImage:dstImage];
     CGRect dstFrame = dstImageView.frame;
@@ -107,16 +109,18 @@
                   toViewController:(UIViewController *)dstViewController
 {
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    //the transition animation will run between two  image-view
     
+    //creat src imageview that will return to
     UIImage *srcImage = [srcView captureImage];
     UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
     CGRect srcFrame = [self rectInScreen:srcView];
-    NSLog(@"%@", NSStringFromCGRect(srcFrame));
     srcImageView.layer.zPosition = 1024;
     srcImageView.frame = srcFrame;
     srcImageView.hidden = YES;
     [srcViewController.view addSubview:srcImageView];
     
+    //create dst imageview that the current view
     UIImage *dstImage = [dstViewController.view captureImage];
     UIImageView *dstImageView = [[UIImageView alloc] initWithImage:dstImage];
     CGRect dstFrame = dstImageView.frame;
