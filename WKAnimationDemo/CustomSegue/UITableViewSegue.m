@@ -12,7 +12,7 @@
 
 - (void)perform
 {
-    [self.sourceViewController presentViewController:self.destinationViewController animated:NO completion:nil];
+    
 }
 
 @end

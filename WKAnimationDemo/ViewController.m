@@ -12,8 +12,7 @@
 #import "DestViewController.h"
 
 @interface ViewController ()<
-  UITableViewDataSource,
-  UITableViewDelegate
+  UITableViewDataSource
 >
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -49,13 +48,10 @@
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    DestViewController *destViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DestViewController"];
+    UITableViewCell *cell = (UITableViewCell *)sender;
+    DestViewController *destViewController = (DestViewController *)segue.destinationViewController;
     DestViewController *tmpView = destViewController;
     destViewController.returnAnimationBlock = ^(){
         [WKAnimation animateReverseFlipFromView:cell fromViewController:self toViewController:tmpView];
