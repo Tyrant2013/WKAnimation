@@ -54,7 +54,8 @@
     //create src imageview that the current view
     UIImage *srcImage = [srcView captureImage];
     UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
-    CGRect srcFrame = [self rectInScreen:srcView];
+//    CGRect srcFrame = [self rectInScreen:srcView];
+    CGRect srcFrame = [srcView.superview convertRect:srcView.frame toView:srcViewController.view];
     srcImageView.layer.zPosition = 1024;
     srcImageView.frame = srcFrame;
     [srcViewController.view addSubview:srcImageView];
@@ -114,7 +115,8 @@
     //creat src imageview that will return to
     UIImage *srcImage = [srcView captureImage];
     UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
-    CGRect srcFrame = [self rectInScreen:srcView];
+//    CGRect srcFrame = [self rectInScreen:srcView];//this is alright,but in animateFlipFromView:fromViewController:toViewController: is wrong
+    CGRect srcFrame = [srcViewController.view convertRect:srcView.frame fromView:srcView.superview];
     srcImageView.layer.zPosition = 1024;
     srcImageView.frame = srcFrame;
     srcImageView.hidden = YES;
