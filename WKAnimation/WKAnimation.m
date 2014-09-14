@@ -59,6 +59,7 @@
     CGRect srcFrame = [srcView.superview convertRect:srcView.frame toView:srcViewController.view];
     srcImageView.layer.zPosition = 1024;
     srcImageView.frame = srcFrame;
+    srcView.hidden = YES;
     [srcViewController.view addSubview:srcImageView];
     
     //create dst imageview that will go to
@@ -114,6 +115,7 @@
     //the transition animation will run between two  image-view
     
     //creat src imageview that will return to
+    srcView.hidden = NO;
     UIImage *srcImage = [srcView captureImage];
     UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
 //    CGRect srcFrame = [self rectInScreen:srcView];//this is alright,but in animateFlipFromView:fromViewController:toViewController: is wrong
@@ -121,6 +123,7 @@
     srcImageView.layer.zPosition = 1024;
     srcImageView.frame = srcFrame;
     srcImageView.hidden = YES;
+    srcView.hidden = YES;
     [srcViewController.view addSubview:srcImageView];
     
     //create dst imageview that the current view
@@ -161,9 +164,75 @@
                                           }
                                           completion:^(BOOL finished) {
                                               [srcImageView removeFromSuperview];
+                                              srcView.hidden = NO;
                                               [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                                           }];
                      }];
 }
 
++ (void)animateExternFromView:(UIView *)srcView fromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController
+{
+    UIImage *srcImage = [srcView captureImage];
+    UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
+    CGRect srcFrame = [srcView.superview convertRect:srcView.frame toView:srcViewController.view];
+    srcImageView.frame = srcFrame;
+    srcImageView.layer.zPosition = 1024;
+    srcView.hidden = YES;
+    [srcViewController.view addSubview:srcImageView];
+    
+    UIImage *dstImage = [dstViewController.view captureImage];
+    UIImageView *dstImageView = [[UIImageView alloc] initWithImage:dstImage];
+    CGRect dstFrame = dstImageView.frame;
+    dstImageView.layer.opacity = 0;
+    [srcViewController.view addSubview:dstImageView];
+    
+    dstImageView.frame = srcFrame;
+    
+    CGFloat duration = 0.5f;
+    [UIView animateWithDuration:duration animations:^{
+        srcImageView.frame = dstFrame;
+        srcImageView.layer.opacity = 0;
+        dstImageView.frame = dstFrame;
+        dstImageView.layer.opacity = 1;
+    } completion:^(BOOL finished) {
+        [srcImageView removeFromSuperview];
+        [dstImageView removeFromSuperview];
+        [srcViewController presentViewController:dstViewController animated:NO completion:nil];
+    }];
+    
+}
+
++ (void)animateReverseExternFromView:(UIView *)srcView fromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController
+{
+    srcView.hidden = NO;
+    UIImage *srcImage = [srcView captureImage];
+    UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
+    CGRect srcFrame = [srcView.superview convertRect:srcView.frame toView:srcViewController.view];
+    srcImageView.frame = srcFrame;
+    srcView.hidden = YES;
+    [srcViewController.view addSubview:srcImageView];
+    srcImageView.layer.opacity = 0;
+    
+    UIImage *dstImage = [dstViewController.view captureImage];
+    UIImageView *dstImageView = [[UIImageView alloc] initWithImage:dstImage];
+    CGRect dstFrame = dstImageView.frame;
+    [srcViewController.view addSubview:dstImageView];
+    srcImageView.frame = dstFrame;
+    dstImageView.layer.opacity = 1;
+    
+    [dstViewController dismissViewControllerAnimated:NO completion:nil];
+    
+    CGFloat duration = 0.5f;
+    [UIView animateWithDuration:duration animations:^{
+        dstImageView.frame = srcFrame;
+        dstImageView.layer.opacity = 0;
+        srcImageView.layer.opacity = 1;
+        srcImageView.frame = srcFrame;
+    } completion:^(BOOL finished) {
+        [dstImageView removeFromSuperview];
+        [srcImageView removeFromSuperview];
+        srcView.hidden = NO;
+        [dstViewController dismissViewControllerAnimated:NO completion:nil];
+    }];
+}
 @end

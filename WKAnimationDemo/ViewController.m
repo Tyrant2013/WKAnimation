@@ -50,13 +50,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UITableViewCell *cell = (UITableViewCell *)sender;
-    DestViewController *destViewController = (DestViewController *)segue.destinationViewController;
-    DestViewController *tmpView = destViewController;
+    __weak DestViewController *destViewController = (DestViewController *)segue.destinationViewController;
     destViewController.returnAnimationBlock = ^(){
-        [WKAnimation animateReverseFlipFromView:cell fromViewController:self toViewController:tmpView];
+//        [WKAnimation animateReverseFlipFromView:sender fromViewController:self toViewController:destViewController];
+        [WKAnimation animateReverseExternFromView:sender fromViewController:self toViewController:destViewController];
     };
-    [WKAnimation animateFlipFromView:cell fromViewController:self toViewController:destViewController];
+//    [WKAnimation animateFlipFromView:sender fromViewController:self toViewController:destViewController];
+    [WKAnimation animateExternFromView:sender fromViewController:self toViewController:destViewController];
 }
 
 @end
