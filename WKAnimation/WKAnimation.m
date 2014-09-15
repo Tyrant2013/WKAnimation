@@ -16,6 +16,7 @@
 + (CGRect)rectInScreen:(UIView *)view
 {
     CGRect realFrame = CGRectZero;
+    
     Class transitionView = NSClassFromString(@"UITransitionView");
     Class layoutContrainerView = NSClassFromString(@"UILayoutContainerView");
     UIView *superView = view.superview;
