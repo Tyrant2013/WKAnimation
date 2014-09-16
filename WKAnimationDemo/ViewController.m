@@ -53,10 +53,12 @@
     __weak DestViewController *destViewController = (DestViewController *)segue.destinationViewController;
     destViewController.returnAnimationBlock = ^(){
 //        [WKAnimation animateReverseFlipFromView:sender fromViewController:self toViewController:destViewController];
-        [WKAnimation animateReverseExternFromView:sender fromViewController:self toViewController:destViewController];
+//        [WKAnimation animateReverseExternFromView:sender fromViewController:self toViewController:destViewController];
+        [WKAnimation animateReverseCoverFromViewController:self toViewController:destViewController];
     };
 //    [WKAnimation animateFlipFromView:sender fromViewController:self toViewController:destViewController];
-    [WKAnimation animateExternFromView:sender fromViewController:self toViewController:destViewController];
+//    [WKAnimation animateExternFromView:sender fromViewController:self toViewController:destViewController];
+    [WKAnimation animateCoverFromViewController:self toViewController:destViewController];
 }
 
 @end

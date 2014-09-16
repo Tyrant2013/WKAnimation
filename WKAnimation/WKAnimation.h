@@ -16,4 +16,7 @@
 + (void)animateExternFromView:(UIView *)srcView fromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController;
 + (void)animateReverseExternFromView:(UIView *)srcView fromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController;
 
++ (void)animateCoverFromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController;
++ (void)animateReverseCoverFromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController;
+
 @end

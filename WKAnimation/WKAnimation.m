@@ -235,4 +235,58 @@
         [dstViewController dismissViewControllerAnimated:NO completion:nil];
     }];
 }
+
++ (void)animateCoverFromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController
+{
+    UIImage *srcImage = [srcViewController.view captureImage];
+    UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
+    [srcViewController.view addSubview:srcImageView];
+    srcImageView.layer.zPosition = 101;
+    
+    UIImage *dstImage = [dstViewController.view captureImage];
+    UIImageView *dstImageView = [[UIImageView alloc] initWithImage:dstImage];
+    CGRect dstFrame = dstImageView.frame;
+    [srcViewController.view addSubview:dstImageView];
+    dstImageView.layer.zPosition = 102;
+    dstImageView.frame = CGRectOffset(dstFrame, dstFrame.size.width, 0);
+    
+    CGFloat duration = 0.3f;
+    
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        srcImageView.layer.opacity = 0;
+        dstImageView.frame = dstFrame;
+    } completion:^(BOOL finished) {
+        [srcImageView removeFromSuperview];
+        [dstImageView removeFromSuperview];
+        [srcViewController presentViewController:dstViewController animated:NO completion:nil];
+    }];
+}
+
++ (void)animateReverseCoverFromViewController:(UIViewController *)srcViewController toViewController:(UIViewController *)dstViewController
+{
+    UIImage *srcImage = [srcViewController.view captureImage];
+    UIImageView *srcImageView = [[UIImageView alloc] initWithImage:srcImage];
+    [srcViewController.view addSubview:srcImageView];
+    srcImageView.layer.zPosition = 101;
+    srcImageView.layer.opacity = 0;
+    
+    UIImage *dstImage = [dstViewController.view captureImage];
+    UIImageView *dstImageView = [[UIImageView alloc] initWithImage:dstImage];
+    CGRect dstFrame = dstImageView.frame;
+    [srcViewController.view addSubview:dstImageView];
+    dstImageView.layer.zPosition = 102;
+    
+    CGFloat duration = 0.3f;
+    
+    [dstViewController dismissViewControllerAnimated:NO completion:nil];
+    
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        srcImageView.layer.opacity = 1;
+        dstImageView.frame = CGRectOffset(dstFrame, dstFrame.size.width, 0);
+    } completion:^(BOOL finished) {
+        [srcImageView removeFromSuperview];
+        [dstImageView removeFromSuperview];
+    }];
+}
+
 @end
